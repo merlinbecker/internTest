@@ -3,6 +3,31 @@ let stream = null;
 let eventCounter = 0;
 let deferredPrompt = null;
 
+// Tab switching function
+function openTab(evt, tabName) {
+    // Declare all variables
+    var i, tabpanels, tabbuttons;
+    
+    // Get all elements with class="tab-panel" and hide them
+    tabpanels = document.getElementsByClassName("tab-panel");
+    for (i = 0; i < tabpanels.length; i++) {
+        tabpanels[i].classList.remove("active");
+    }
+    
+    // Get all elements with class="tab-button" and remove the class "active"
+    tabbuttons = document.getElementsByClassName("tab-button");
+    for (i = 0; i < tabbuttons.length; i++) {
+        tabbuttons[i].classList.remove("active");
+    }
+    
+    // Show the specific tab content and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).classList.add("active");
+    evt.currentTarget.classList.add("active");
+    
+    // Log the tab change event
+    logEvent('Navigation', `Tab switched to: ${tabName}`);
+}
+
 // Initialize app when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('PWA App loaded');
